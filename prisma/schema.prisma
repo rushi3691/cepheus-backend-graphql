@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id         Int         @id @default(autoincrement())
+  user_uuid  String      @unique
+  user_name  String
+  college    String?
+  grade      Int?
+  mobile     String?
+  email      String      @unique
+  image_url  String?
+  registered Boolean     @default(false)
+  event_team EventTeam[]
+  teams      Team[]
+}
+
+model Team {
+  id         Int         @id @default(autoincrement())
+  team_name  String      @unique
+  team_code  String?     @unique
+  event_id   Int
+  event      Event       @relation(fields: [event_id], references: [id])
+  members    User[]
+  event_team EventTeam[]
+  @@unique([event_id, team_name])
+}
+
+model Event {
+  id         Int         @id @default(autoincrement())
+  event_name String
+  min_grade  Int
+  max_grade  Int
+  max_mates  Int
+  active     Boolean     @default(true)
+  teams      Team[]
+  event_team EventTeam[]
+}
+
+model EventTeam {
+  id       Int   @id @default(autoincrement())
+  team_id  Int
+  event_id Int
+  user_id  Int
+  team     Team  @relation(fields: [team_id], references: [id])
+  event    Event @relation(fields: [event_id], references: [id])
+  user     User  @relation(fields: [user_id], references: [id])
+
+  @@unique([team_id, event_id, user_id])
+  @@unique([event_id, user_id])
+}
