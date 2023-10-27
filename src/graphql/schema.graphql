@@ -1,0 +1,71 @@
+type Query {
+  hello: String!
+  getTeamInfo(teamid: Int!): TeamResponse!
+}
+
+type Mutation {
+  registerUser(
+    user_name: String!
+    college: String!
+    grade: Int!
+    mobile: String!
+    image_url: String
+  ): UserResponse!
+
+  loginUser(idToken: String!): UserResponse!
+
+  createTeam(team_name: String!, event_id: Int!): TeamResponse!
+  
+  participateInEvent(team_code: String!, event_id: Int!): TeamResponse!
+}
+
+type UserResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+  token: String
+  user: User
+}
+
+type TeamResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+  team: Team
+}
+
+type User {
+  id: Int!
+  user_uuid: String!
+  user_name: String!
+  college: String
+  grade: Int
+  mobile: String
+  email: String!
+  image_url: String
+  registered: Boolean!
+}
+
+type Team {
+  id: Int!
+  team_name: String!
+  team_code: String
+  event_id: Int!
+  users: [User]
+}
+
+type Event {
+  id: Int!
+  event_name: String!
+  min_grade: Int!
+  max_grade: Int!
+  max_mates: Int!
+  active: Boolean!
+}
+
+type EventTeam {
+  id: Int!
+  team_id: Int!
+  event_id: Int!
+  user_id: Int!
+}
