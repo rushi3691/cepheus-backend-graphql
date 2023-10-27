@@ -7,7 +7,13 @@ const config: CodegenConfig = {
   generates: {
     "./src/types.ts": {
       plugins: ["typescript", "typescript-resolvers"],
-      
+      config: {
+        contextType: "./context#DBContext",
+        // mappers: {
+        //   User: "./graphql/models#UserModel",
+        //   Team: "./graphql/models#TeamModel",
+        // }
+      },
     },
   },
 };

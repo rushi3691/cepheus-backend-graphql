@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { DBContext } from './context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -217,7 +218,7 @@ export type ResolversParentTypes = {
   UserResponse: UserResponse;
 };
 
-export type EventResolvers<ContextType = any, ParentType extends ResolversParentTypes['Event'] = ResolversParentTypes['Event']> = {
+export type EventResolvers<ContextType = DBContext, ParentType extends ResolversParentTypes['Event'] = ResolversParentTypes['Event']> = {
   active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   event_name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -227,7 +228,7 @@ export type EventResolvers<ContextType = any, ParentType extends ResolversParent
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type EventTeamResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventTeam'] = ResolversParentTypes['EventTeam']> = {
+export type EventTeamResolvers<ContextType = DBContext, ParentType extends ResolversParentTypes['EventTeam'] = ResolversParentTypes['EventTeam']> = {
   event_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   team_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -235,19 +236,19 @@ export type EventTeamResolvers<ContextType = any, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+export type MutationResolvers<ContextType = DBContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createTeam?: Resolver<ResolversTypes['TeamResponse'], ParentType, ContextType, RequireFields<MutationCreateTeamArgs, 'event_id' | 'team_name'>>;
   loginUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'idToken'>>;
   participateInEvent?: Resolver<ResolversTypes['TeamResponse'], ParentType, ContextType, RequireFields<MutationParticipateInEventArgs, 'event_id' | 'team_code'>>;
   registerUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'college' | 'grade' | 'mobile' | 'user_name'>>;
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = DBContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   getTeamInfo?: Resolver<ResolversTypes['TeamResponse'], ParentType, ContextType, RequireFields<QueryGetTeamInfoArgs, 'teamid'>>;
   hello?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 };
 
-export type TeamResolvers<ContextType = any, ParentType extends ResolversParentTypes['Team'] = ResolversParentTypes['Team']> = {
+export type TeamResolvers<ContextType = DBContext, ParentType extends ResolversParentTypes['Team'] = ResolversParentTypes['Team']> = {
   event_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   team_code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -256,7 +257,7 @@ export type TeamResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type TeamResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['TeamResponse'] = ResolversParentTypes['TeamResponse']> = {
+export type TeamResponseResolvers<ContextType = DBContext, ParentType extends ResolversParentTypes['TeamResponse'] = ResolversParentTypes['TeamResponse']> = {
   code?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -264,7 +265,7 @@ export type TeamResponseResolvers<ContextType = any, ParentType extends Resolver
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+export type UserResolvers<ContextType = DBContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   college?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   grade?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -277,7 +278,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type UserResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserResponse'] = ResolversParentTypes['UserResponse']> = {
+export type UserResponseResolvers<ContextType = DBContext, ParentType extends ResolversParentTypes['UserResponse'] = ResolversParentTypes['UserResponse']> = {
   code?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -286,7 +287,7 @@ export type UserResponseResolvers<ContextType = any, ParentType extends Resolver
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = DBContext> = {
   Event?: EventResolvers<ContextType>;
   EventTeam?: EventTeamResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
