@@ -21,6 +21,7 @@
   "scripts": {
     "start": "bun src/index.ts",
     "dev": "bun --hot src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "codegen": "graphql-codegen"
   }
 }
